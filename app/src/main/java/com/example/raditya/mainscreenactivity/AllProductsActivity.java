@@ -1,14 +1,5 @@
 package com.example.raditya.mainscreenactivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,18 +14,16 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class AllProductsActivity extends ListActivity {
-    // Progress Dialog
-    private ProgressDialog pDialog;
-
-    //Creating JSON Parser object
-    JSONParser jParser = new JSONParser();
-
-    ArrayList<HashMap<String, String>> productsList;
-
-    // url to get all products list
-    private static String url_all_products = "http://tegarankar.esy.es/Getdata.php";
-
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_DATA = "data";
@@ -42,10 +31,15 @@ public class AllProductsActivity extends ListActivity {
     private static final String TAG_NAMA = "nama";
     private static final String TAG_LATITUDE = "latitude";
     private static final String TAG_LONGITUDE = "longitude";
-
-
+    // url to get all products list
+    private static String url_all_products = "http://tegarankar.esy.es/Getdata.php";
+    //Creating JSON Parser object
+    JSONParser jParser = new JSONParser();
+    ArrayList<HashMap<String, String>> productsList;
     // products JSONArray
     JSONArray data = null;
+    // Progress Dialog
+    private ProgressDialog pDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -94,6 +88,7 @@ public class AllProductsActivity extends ListActivity {
             finish();
             startActivity(intent);
 
+            
         }
     }
 
