@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Name"
+        android:text="Id"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
@@ -16,7 +16,7 @@
 
     <!-- Input Name -->
     <EditText
-        android:id="@+id/inputName"
+        android:id="@+id/id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Price"
+        android:text="nama"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
@@ -37,20 +37,20 @@
         />
     <!-- Input Price -->
     <EditText
-        android:id="@+id/inputPrice"
+        android:id="@+id/nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginBottom="15dp"
         android:singleLine="true"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         />
 
     <!-- Description Label -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="Latitude"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
@@ -59,12 +59,33 @@
 
     <!-- Input description -->
     <EditText
-        android:id="@+id/inputDesc"
+        android:id="@+id/latitude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginBottom="15dp"
-        android:lines="4"
+        android:lines="1"
+        android:gravity="top"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Longitude"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:textSize="17dp"
+        />
+
+    <!-- Input description -->
+    <EditText
+        android:id="@+id/longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="15dp"
+        android:lines="1"
         android:gravity="top"
         />
 

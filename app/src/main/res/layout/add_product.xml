@@ -43,7 +43,7 @@
         android:layout_margin="5dp"
         android:layout_marginBottom="15dp"
         android:singleLine="true"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         />
     <!-- Description Label -->
     <TextView

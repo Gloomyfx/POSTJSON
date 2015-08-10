@@ -29,7 +29,7 @@ public class NewProductActivity extends Activity {
     EditText inputLongitude;
 
     // url to create new product
-    private static String url_create_product = "http://api.androidhive.info/android_connect/create_product.php";
+    private static String url_create_product = "http://tegarankar.esy.es/Post.php";
 
     //JSON Node Names
     private static final String TAG_SUCCESS = "success";

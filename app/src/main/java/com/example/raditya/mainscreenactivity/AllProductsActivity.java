@@ -33,13 +33,16 @@ public class AllProductsActivity extends ListActivity {
     ArrayList<HashMap<String, String>> productsList;
 
     // url to get all products list
-    private static String url_all_products = "http://api.androidhive.info/android_connect/get_all_products.php";
+    private static String url_all_products = "http://tegarankar.esy.es/Getdata.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_DATA = "data";
     private static final String TAG_ID = "id";
     private static final String TAG_NAMA = "nama";
+    private static final String TAG_LATITUDE = "latitude";
+    private static final String TAG_LONGITUDE = "longitude";
+
 
     // products JSONArray
     JSONArray data = null;
@@ -137,6 +140,8 @@ public class AllProductsActivity extends ListActivity {
                         // Storing each json item in variable
                         String Id = c.getString(TAG_ID);
                         String nama = c.getString(TAG_NAMA);
+                        String latitude = c.getString(TAG_LATITUDE);
+                        String longitude = c.getString(TAG_LONGITUDE);
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
@@ -144,6 +149,8 @@ public class AllProductsActivity extends ListActivity {
                         // adding each child node to HashMap key => value
                         map.put(TAG_ID, Id);
                         map.put(TAG_NAMA, nama);
+                        map.put(TAG_LATITUDE, latitude);
+                        map.put(TAG_LONGITUDE, longitude);
 
                         // adding HashList to ArrayList
                         productsList.add(map);

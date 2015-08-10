@@ -22,14 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class EditProductActivity extends Activity {
-    EditText txtName;
-    EditText txtPrice;
-    EditText txtDesc;
-    EditText txtCreateAt;
+    EditText txtId;
+    EditText txtNama;
+    EditText txtLatitude;
+    EditText txtLongitude;
+
     Button btnSave;
     Button btnDelete;
 
-    String pid;
+    String id;
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -38,21 +39,21 @@ public class EditProductActivity extends Activity {
     JSONParser jsonParser = new JSONParser();
 
     // single product url
-    private static final String url_product_detials = "http://api.androidhive.info/android_connect/get_product_details.php";
+    private static final String url_data_detials = "http://tegarankar.esy.es/Getdata.php";
 
     // url to update product
-    private static final String url_update_product = "http://api.androidhive.info/android_connect/update_product.php";
+    private static final String url_update_data = "http://tegarankar.esy.es/Update.php";
 
     // url to delete product
-    private static final String url_delete_product = "http://api.androidhive.info/android_connect/delete_product.php";
+    private static final String url_delete_data = "http://tegarankar.esy.es/Delete.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCT = "product";
-    private static final String TAG_PID = "pid";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_PRICE = "price";
-    private static final String TAG_DESCRIPTION = "description";
+    private static final String TAG_DATA = "data";
+    private static final String TAG_ID = "id";
+    private static final String TAG_NAMA = "nama";
+    private static final String TAG_LATITUDE = "latitude";
+    private static final String TAG_LONGITUDE = "longitude";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class EditProductActivity extends Activity {
         Intent i = getIntent();
 
         // getting product id (pid) from intent
-        pid = i.getStringExtra(TAG_PID);
+        id = i.getStringExtra(TAG_ID);
 
         // Getting complete product details in background thread
         new GetProductDetails().execute();
@@ -102,7 +103,7 @@ public class EditProductActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(EditProductActivity.this);
-            pDialog.setMessage("Loading product details. Please wait...");
+            pDialog.setMessage("Loading data details. Please wait...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -121,36 +122,38 @@ public class EditProductActivity extends Activity {
                     try {
                         // Building Parameters
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair("pid", pid));
+                        params.add(new BasicNameValuePair("id", id));
 
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
-                                url_product_detials, "GET", params);
+                                url_data_detials, "GET", params);
 
                         // check your log for json response
-                        Log.d("Single Product Details", json.toString());
+                        Log.d("Single data Details", json.toString());
 
                         // json success tag
                         success = json.getInt(TAG_SUCCESS);
                         if (success == 1) {
                             // successfully received product details
                             JSONArray productObj = json
-                                    .getJSONArray(TAG_PRODUCT); // JSON Array
+                                    .getJSONArray(TAG_DATA); // JSON Array
 
                             // get first product object from JSON Array
-                            JSONObject product = productObj.getJSONObject(0);
+                            JSONObject data = productObj.getJSONObject(0);
 
                             // product with this pid found
                             // Edit Text
-                            txtName = (EditText) findViewById(R.id.inputName);
-                            txtPrice = (EditText) findViewById(R.id.inputPrice);
-                            txtDesc = (EditText) findViewById(R.id.inputDesc);
+                            txtId = (EditText) findViewById(R.id.id);
+                            txtNama = (EditText) findViewById(R.id.nama);
+                            txtLatitude = (EditText) findViewById(R.id.latitude);
+                            txtLongitude = (EditText) findViewById(R.id.longitude);
 
                             // display product data in EditText
-                            txtName.setText(product.getString(TAG_NAME));
-                            txtPrice.setText(product.getString(TAG_PRICE));
-                            txtDesc.setText(product.getString(TAG_DESCRIPTION));
+                            txtId.setText(data.getString(TAG_ID));
+                            txtNama.setText(data.getString(TAG_NAMA));
+                            txtLatitude.setText(data.getString(TAG_LATITUDE));
+                            txtLongitude.setText(data.getString(TAG_LONGITUDE));
 
                         } else {
                             // product with pid not found
@@ -198,20 +201,20 @@ public class EditProductActivity extends Activity {
         protected String doInBackground(String... args) {
 
             // getting updated data from EditTexts
-            String name = txtName.getText().toString();
-            String price = txtPrice.getText().toString();
-            String description = txtDesc.getText().toString();
+            String nama = txtNama.getText().toString();
+            String latitude = txtLatitude.getText().toString();
+            String longitude = txtLongitude.getText().toString();
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(TAG_PID, pid));
-            params.add(new BasicNameValuePair(TAG_NAME, name));
-            params.add(new BasicNameValuePair(TAG_PRICE, price));
-            params.add(new BasicNameValuePair(TAG_DESCRIPTION, description));
+            params.add(new BasicNameValuePair(TAG_ID, id));
+            params.add(new BasicNameValuePair(TAG_NAMA, nama));
+            params.add(new BasicNameValuePair(TAG_LATITUDE, latitude));
+            params.add(new BasicNameValuePair(TAG_LONGITUDE, longitude));
 
             // sending modified data through http request
             // Notice that update product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url_update_product,
+            JSONObject json = jsonParser.makeHttpRequest(url_update_data,
                     "POST", params);
 
             // check json success tag
@@ -273,11 +276,11 @@ public class EditProductActivity extends Activity {
             try {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("pid", pid));
+                params.add(new BasicNameValuePair("id", id));
 
                 // getting product details by making HTTP request
                 JSONObject json = jsonParser.makeHttpRequest(
-                        url_delete_product, "POST", params);
+                        url_delete_data, "POST", params);
 
                 // check your log for json response
                 Log.d("Delete Product", json.toString());
