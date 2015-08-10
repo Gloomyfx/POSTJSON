@@ -42,7 +42,7 @@ public class AllProductsActivity extends ListActivity {
     private ProgressDialog pDialog;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_products);
 
@@ -80,15 +80,14 @@ public class AllProductsActivity extends ListActivity {
 
     // Response from Edit Product Activity
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-     super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         //if result code 100
-        if (resultCode == 100){
+        if (resultCode == 100) {
             Intent intent = getIntent();
             finish();
             startActivity(intent);
 
-            
         }
     }
 
@@ -96,7 +95,7 @@ public class AllProductsActivity extends ListActivity {
 
         /**
          * Before starting background thread Show Progress Dialog
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -109,7 +108,7 @@ public class AllProductsActivity extends ListActivity {
 
         /**
          * getting All products from url
-         * */
+         */
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -168,7 +167,8 @@ public class AllProductsActivity extends ListActivity {
 
         /**
          * After completing background task Dismiss the progress dialog
-         * **/
+         * *
+         */
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
@@ -180,9 +180,9 @@ public class AllProductsActivity extends ListActivity {
                      * */
                     ListAdapter adapter = new SimpleAdapter(
                             AllProductsActivity.this, productsList,
-                            R.layout.list_item, new String[] { TAG_ID,
+                            R.layout.list_item, new String[]{TAG_ID,
                             TAG_NAMA},
-                            new int[] { R.id.id, R.id.nama });
+                            new int[]{R.id.id, R.id.nama});
                     // updating listview
                     setListAdapter(adapter);
                 }
